@@ -1,0 +1,87 @@
+{% load static %}
+{% load markdown_extra %}
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Dimension by HTML5 UP</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'highlight/atom-one-dark.css' %}">
+    <!--[if lte IE 9]><link rel="stylesheet" href=" {% static 'assets/css/ie9.css' %}" /><![endif]-->
+    <noscript>
+        <link rel="stylesheet" href="{% static 'assets/css/noscript.css'%}"/>
+    </noscript>
+</head>
+<body>
+
+<!-- Wrapper -->
+    <div id="right">
+        <a href="javascript:void(0);" id="article-prev" class="icon fa-angle-up"></a>
+        <a href="javascript:void(0);" id="article-next" class="icon fa-angle-down"></a>
+    </div>
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+
+        <!-- Intro -->
+        <article id="articles">
+            {% for article in articles %}
+                {% if forloop.counter > 1 %}
+                    <div class="one_article thumb" data-article="{{ article.id }}">
+                {% else %}
+                    <div class="one_article thumb article-actived" data-article="{{ article.id }}">
+                {% endif %}
+                <h2 class="major">{{ article.title }}</h2>
+                <div class="time_show">
+                    <span class="fa fa-tags"></span>
+                    <a href="#">{{ article.tag }}</a>
+                    <p><span class="fa fa-calendar"></span>
+                        {{ article.create_time|date:"Y-m-d H:i:s" }}</p>
+                </div>
+                <span class="image main"><img src="{% static 'images/pic02.jpg'%}" alt=""/></span>
+                <p>{{ article.content |markdown_filter }}</p>
+            <hr class="article_sep">
+            </div>
+            {% endfor %}
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+    </footer>
+
+</div>
+
+<!-- BG -->
+<div id="bg"></div>
+
+<!-- Scripts -->
+<script src="{% static 'assets/js/jquery.min.js'%}"></script>
+<script src="{% static 'assets/js/skel.min.js'%}"></script>
+<script src="{% static 'assets/js/util.js'%}"></script>
+<script src="{% static 'assets/js/main.js'%}"></script>
+<script src="{% static 'highlight/highlight.pack.js' %}"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+    {#    setTimeout(function(){#}
+    $(document).ready(function () {
+        console.log('111')
+        $("#header").hide();
+        $("#main").show();
+        $("#articles").show();
+        $("#articles").addClass('active');
+    })
+
+    {#    },1000)#}
+
+</script>
+</body>
+</html>
